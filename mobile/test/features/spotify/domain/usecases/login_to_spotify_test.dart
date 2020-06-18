@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:jukeboxify/core/usecases/usecase.dart';
-import 'package:jukeboxify/features/spotify/domain/entities/spotify_user.dart';
+import 'package:jukeboxify/features/spotify/domain/entities/spotify_user_entity.dart';
 import 'package:jukeboxify/features/spotify/domain/repositories/spotify_api_repository.dart';
 import 'package:jukeboxify/features/spotify/domain/repositories/spotify_auth_repository.dart';
 import 'package:jukeboxify/features/spotify/domain/usecases/login_to_spotify.dart';

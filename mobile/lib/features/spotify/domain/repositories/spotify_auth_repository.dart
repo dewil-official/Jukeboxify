@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/error/failures.dart';
-import '../entities/spotify_user.dart';
+import '../entities/spotify_user_entity.dart';
 
 abstract class SpotifyAuthRepository {
   // The token is being saved internally,
