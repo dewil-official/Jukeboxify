@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:jukeboxify/core/error/failure.dart';
+import 'package:jukeboxify/core/error/failures.dart';
 import 'package:jukeboxify/features/spotify/domain/entities/spotify_user.dart';
 import 'package:jukeboxify/features/spotify/domain/repositories/spotify_api_repository.dart';
 import 'package:jukeboxify/features/spotify/domain/repositories/spotify_auth_repository.dart';

@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 
-import '../../../../core/error/failure.dart';
+import '../../../../core/error/failures.dart';
 import '../entities/spotify_user.dart';
 
 abstract class SpotifyAuthRepository {
