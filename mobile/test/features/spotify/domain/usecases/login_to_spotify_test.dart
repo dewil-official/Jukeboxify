@@ -24,7 +24,8 @@ main() {
   });
 
   test('prompts the user and returns a SpotifyUser.', () async {
-    SpotifyUser spotifyUser = SpotifyUser(displayName: 'Superman1337');
+    SpotifyUserEntity spotifyUser =
+        SpotifyUserEntity(displayName: 'Superman1337');
 
     when(mockSpotifyAuthRepository.hasToken())
         .thenAnswer((realInvocation) => Future.value(false));
@@ -43,7 +44,7 @@ main() {
   });
 
   test('returns a SpotifyUser() if logged in already.', () async {
-    SpotifyUser spotifyUser = SpotifyUser(displayName: 'Batman');
+    SpotifyUserEntity spotifyUser = SpotifyUserEntity(displayName: 'Batman');
 
     when(mockSpotifyAuthRepository.hasToken())
         .thenAnswer((realInvocation) => Future.value(true));
@@ -61,7 +62,8 @@ main() {
   });
 
   test('refreshes the token automatically', () async {
-    SpotifyUser spotifyUser = SpotifyUser(displayName: 'Peter Parker');
+    SpotifyUserEntity spotifyUser =
+        SpotifyUserEntity(displayName: 'Peter Parker');
     String testToken = '1h9hDIO0h1';
 
     when(mockSpotifyAuthRepository.hasToken())

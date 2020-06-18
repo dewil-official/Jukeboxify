@@ -7,15 +7,15 @@ import 'package:jukeboxify/features/spotify/domain/repositories/spotify_auth_rep
 
 import 'package:meta/meta.dart';
 
-class LoginToSpotify extends UseCase<SpotifyUser, NoParams> {
+class LoginToSpotify extends UseCase<SpotifyUserEntity, NoParams> {
   SpotifyApiRepository apiRepo;
   SpotifyAuthRepository authRepo;
 
   LoginToSpotify({@required this.apiRepo, @required this.authRepo});
 
   @override
-  Future<Either<Failure, SpotifyUser>> call(NoParams _) async {
-    Either<Failure, SpotifyUser> result;
+  Future<Either<Failure, SpotifyUserEntity>> call(NoParams _) async {
+    Either<Failure, SpotifyUserEntity> result;
     if (await authRepo.hasToken()) {
       if (!await authRepo.isTokenExpired()) {
         result = await apiRepo.getSpotifyUser(await authRepo.getToken());

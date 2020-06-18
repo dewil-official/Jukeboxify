@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
-class SpotifyUser extends Equatable {
+class SpotifyUserEntity extends Equatable {
   final String displayName;
 
-  SpotifyUser({@required this.displayName});
+  SpotifyUserEntity({@required this.displayName});
 
   @override
   List<Object> get props => [displayName];
