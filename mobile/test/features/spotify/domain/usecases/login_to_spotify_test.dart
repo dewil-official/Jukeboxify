@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:jukeboxify/core/usecases/usecase.dart';
 import 'package:jukeboxify/features/spotify/domain/entities/spotify_user.dart';
 import 'package:jukeboxify/features/spotify/domain/repositories/spotify_api_repository.dart';
 import 'package:jukeboxify/features/spotify/domain/repositories/spotify_auth_repository.dart';
@@ -34,7 +35,7 @@ main() {
     when(mockSpotifyApiRepository.getSpotifyUser(any))
         .thenAnswer((realInvocation) => Future.value(Right(spotifyUser)));
 
-    final result = await usecase();
+    final result = await usecase(NoParams());
 
     expect(result, Right(spotifyUser));
     verify(mockSpotifyAuthRepository.promptLogin());
@@ -51,7 +52,7 @@ main() {
     when(mockSpotifyApiRepository.getSpotifyUser(any))
         .thenAnswer((realInvocation) => Future.value(Right(spotifyUser)));
 
-    final result = await usecase();
+    final result = await usecase(NoParams());
 
     expect(result, Right(spotifyUser));
     verify(mockSpotifyAuthRepository.hasToken());
@@ -72,7 +73,7 @@ main() {
     when(mockSpotifyApiRepository.getSpotifyUser(argThat(isA<String>())))
         .thenAnswer((realInvocation) => Future.value(Right(spotifyUser)));
 
-    final result = await usecase();
+    final result = await usecase(NoParams());
 
     expect(result, Right(spotifyUser));
     verify(mockSpotifyAuthRepository.isTokenExpired());
