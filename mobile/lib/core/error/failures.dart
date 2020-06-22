@@ -6,3 +6,5 @@ abstract class Failure extends Equatable {
 }
 
 class SpotifyLoginFailure extends Failure {}
+
+class SpotifyServerFailure extends Failure {}
