@@ -23,7 +23,8 @@ main() {
   });
 
   group('getSpotifyUser', () {
-    test('gets a SpotifyUser from oAuth2Helper library', () async {
+    test('returns a SpotifyUser if successful', () async {
+      // arrange
       String jsonResponse = fixture('user.json');
       final apiResponse = Response(jsonResponse, 200);
       final expectedResult =
@@ -31,15 +32,15 @@ main() {
 
       when(mockOAuth2Helper.get(argThat(isA<String>())))
           .thenAnswer((_) => Future.value(apiResponse));
-
+      // act
       final result = await spotifyClient.getSpotifyUser();
-
+      // assert
       expect(result, expectedResult);
 
       verify(mockOAuth2Helper.get(argThat(isA<String>())));
       verifyNoMoreInteractions(mockOAuth2Helper);
     });
-    test('returns a Failure if http request fails', () async {
+    test('throws Exception on Network failure', () async {
       final apiResponse = Response('', 408);
       when(mockOAuth2Helper.get(any))
           .thenAnswer((_) => Future.value(apiResponse));
@@ -47,6 +48,17 @@ main() {
       try {
         await spotifyClient.getSpotifyUser();
       } catch (e) {
+        expect(e, isA<Exception>());
+      }
+    });
+    test('throws Exception on library failure', () async {
+      // arrange
+      when(mockOAuth2Helper.get(any)).thenAnswer((_) => Future.value(null));
+      // act
+      try {
+        await spotifyClient.getSpotifyUser();
+      } catch (e) {
+        // assert
         expect(e, isA<Exception>());
       }
     });

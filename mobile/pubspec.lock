@@ -71,27 +71,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.14.12"
-  connectivity:
-    dependency: "direct main"
-    description:
-      name: connectivity
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.4.8+6"
-  connectivity_macos:
-    dependency: transitive
-    description:
-      name: connectivity_macos
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.0+3"
-  connectivity_platform_interface:
-    dependency: transitive
-    description:
-      name: connectivity_platform_interface
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.6"
   convert:
     dependency: transitive
     description:
@@ -134,41 +113,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.0"
-  firebase:
-    dependency: transitive
-    description:
-      name: firebase
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "7.3.0"
-  firebase_core:
-    dependency: "direct main"
-    description:
-      name: firebase_core
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.4.5"
-  firebase_core_platform_interface:
-    dependency: transitive
-    description:
-      name: firebase_core_platform_interface
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.4"
-  firebase_core_web:
-    dependency: transitive
-    description:
-      name: firebase_core_web
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.1+2"
-  firebase_remote_config:
-    dependency: "direct main"
-    description:
-      name: firebase_remote_config
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.3.1"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -200,11 +144,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.4"
-  flutter_web_plugins:
-    dependency: transitive
-    description: flutter
-    source: sdk
-    version: "0.0.0"
   get_it:
     dependency: "direct main"
     description:
@@ -380,13 +319,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.4.0"
-  plugin_platform_interface:
-    dependency: transitive
-    description:
-      name: plugin_platform_interface
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.2"
   pool:
     dependency: transitive
     description:

@@ -1,4 +1,4 @@
-package com.example.jukeboxify
+package app.jukeboxify.mobile
 
 import io.flutter.embedding.android.FlutterActivity
 
