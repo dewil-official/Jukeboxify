@@ -16,6 +16,7 @@ dependencies:
     sdk: flutter
   # Dependency Injection
   get_it: ^4.0.0
+  injectable: ^0.4.0+1
   # State Management
   bloc: ^4.0.0
   flutter_bloc: ^4.0.0
@@ -45,6 +46,10 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  # add the generator to your dev_dependencies
+  injectable_generator:
+  # of course build_runner is needed to run the generator
+  build_runner:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
