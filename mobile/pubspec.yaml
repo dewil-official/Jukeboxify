@@ -18,9 +18,9 @@ dependencies:
   get_it: ^4.0.0
   injectable: ^0.4.0+1
   # State Management
-  bloc: ^4.0.0
-  flutter_bloc: ^4.0.0
-  bloc_test: ^5.1.0
+  bloc: ^6.0.0
+  flutter_bloc: ^6.0.0
+  bloc_test: ^7.0.0
   # Allow Object Comparison
   equatable: ^1.2.0
   # Functional Programming Additionals

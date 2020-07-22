@@ -7,8 +7,8 @@ part 'main_event.dart';
 part 'main_state.dart';
 
 class MainBloc extends Bloc<MainEvent, MainState> {
-  @override
-  MainState get initialState => MainInitial();
+  MainBloc() : super(MainInitial());
+
   @override
   Stream<MainState> mapEventToState(
     MainEvent event,

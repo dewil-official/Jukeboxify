@@ -23,36 +23,35 @@ main() {
 
   blocTest(
     'emits [] when nothing is added',
-    build: () async => spotifyBloc,
+    build: () => spotifyBloc,
     expect: [],
   );
 
   test(
-    'should emit [Initial, Loaded] when data is gotten successfully',
+    'should by [SpotifyInitial] first and emit [SpotifyLoaded] after loading the data.',
     () async {
       // arrange
       when(mockGetSpotifyProfile(any))
           .thenAnswer((_) async => Right(spotifyUser));
       // assert later
-      final expected = [
-        SpotifyInitial(),
-        SpotifyLoaded(spotifyUser: spotifyUser)
-      ];
-      expectLater(spotifyBloc, emitsInOrder(expected));
+      final spotifyLoadedState = SpotifyLoaded(spotifyUser: spotifyUser);
+      expect(spotifyBloc.state, isA<SpotifyInitial>());
+      expectLater(spotifyBloc, emits(spotifyLoadedState));
       // act
       spotifyBloc.add(LoadUser());
     },
   );
 
   test(
-    'should emit [Initial, Error] when getting data fails',
+    'should emit [SpotifyInitial, SpotifyError] when getting data fails',
     () async {
       // arrange
       final failure = SpotifyServerFailure();
+      final spotifyErrorState = SpotifyError(failure: failure);
       when(mockGetSpotifyProfile(any)).thenAnswer((_) async => Left(failure));
-      // assert later
-      final expected = [SpotifyInitial(), SpotifyError(failure: failure)];
-      expectLater(spotifyBloc, emitsInOrder(expected));
+      // assert
+      expect(spotifyBloc.state, isA<SpotifyInitial>());
+      expectLater(spotifyBloc, emits(spotifyErrorState));
       // act
       spotifyBloc.add(LoadUser());
     },
