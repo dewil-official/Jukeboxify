@@ -13,6 +13,6 @@ class MainBloc extends Bloc<MainEvent, MainState> {
   Stream<MainState> mapEventToState(
     MainEvent event,
   ) async* {
-    // TODO: implement mapEventToState
+    throw UnimplementedError();
   }
 }

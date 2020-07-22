@@ -2,7 +2,6 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:jukeboxify/core/error/failures.dart';
-import 'package:jukeboxify/core/usecases/usecase.dart';
 import 'package:jukeboxify/features/spotify/domain/entities/spotify_user_entity.dart';
 import 'package:jukeboxify/features/spotify/domain/usecases/get_spotify_profile.dart';
 import 'package:jukeboxify/features/spotify/presentation/bloc/spotify/spotify_bloc.dart';
