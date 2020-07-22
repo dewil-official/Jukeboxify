@@ -3,9 +3,28 @@ import 'dart:convert';
 import 'package:injectable/injectable.dart';
 import 'package:jukeboxify/core/error/exceptions.dart';
 import 'package:jukeboxify/features/spotify/data/models/spotify_user_model.dart';
+import 'package:oauth2_client/oauth2_client.dart';
 import 'package:oauth2_client/oauth2_helper.dart';
 import 'package:meta/meta.dart';
 
+@module
+abstract class RegisterModule {
+  @Named('OAuth2Client')
+  OAuth2Client get oAuth2Client => OAuth2Client(
+      authorizeUrl: 'https://accounts.spotify.com/authorize',
+      tokenUrl: 'https://accounts.spotify.com/api/token',
+      redirectUri: 'app.jukeboxify.mobile://oauth2redirect',
+      customUriScheme: 'app.jukeboxify.mobile');
+
+  @singleton
+  OAuth2Helper oAuth2Helper(@Named("OAuth2Client") OAuth2Client helper) =>
+      OAuth2Helper(helper,
+          grantType: OAuth2Helper.AUTHORIZATION_CODE,
+          clientId: '0f883a103e00477e8a03b145ef8157ab',
+          scopes: ['user-modify-playback-state']);
+}
+
+@Environment(Environment.dev)
 @singleton
 class SpotifyClient {
   final OAuth2Helper oAuth2Helper;

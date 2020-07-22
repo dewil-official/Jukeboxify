@@ -7,7 +7,8 @@ import 'package:jukeboxify/core/error/failures.dart';
 import 'package:jukeboxify/features/spotify/domain/entities/spotify_user_entity.dart';
 import 'package:jukeboxify/features/spotify/domain/repositories/spotify_repo.dart';
 
-@singleton
+@Environment(Environment.dev)
+@Singleton(as: SpotifyRepo)
 class SpotifyRepoImpl implements SpotifyRepo {
   final SpotifyClient spotifyClient;
 

@@ -12,6 +12,7 @@ import 'package:meta/meta.dart';
 part 'spotify_event.dart';
 part 'spotify_state.dart';
 
+@Environment(Environment.dev)
 @singleton
 class SpotifyBloc extends Bloc<SpotifyEvent, SpotifyState> {
   final GetSpotifyProfile getSpotifyProfile;
