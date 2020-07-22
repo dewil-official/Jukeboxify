@@ -1,10 +1,12 @@
 import 'dart:convert';
 
+import 'package:injectable/injectable.dart';
 import 'package:jukeboxify/core/error/exceptions.dart';
 import 'package:jukeboxify/features/spotify/data/models/spotify_user_model.dart';
 import 'package:oauth2_client/oauth2_helper.dart';
 import 'package:meta/meta.dart';
 
+@singleton
 class SpotifyClient {
   final OAuth2Helper oAuth2Helper;
 
