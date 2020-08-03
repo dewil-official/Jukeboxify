@@ -3,12 +3,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jukeboxify/features/spotify/presentation/bloc/spotify/spotify_bloc.dart';
 
 class SpotifyUserInfoListItem extends StatelessWidget {
+  final keys = {
+    "not-loaded": UniqueKey(),
+    "loaded": UniqueKey(),
+    "error": UniqueKey()
+  };
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SpotifyBloc, SpotifyState>(builder: (context, state) {
       return Card(
           child: state is SpotifyInitial
               ? ListTile(
+                  key: keys["not-loaded"],
                   title: Text('Spotify isn\'t loaded.'),
                   subtitle: Text('Click the button to load Spotify.'),
                   trailing: RaisedButton.icon(
@@ -27,13 +34,15 @@ class SpotifyUserInfoListItem extends StatelessWidget {
                 )
               : state is SpotifyLoaded
                   ? ListTile(
+                      key: keys["loaded"],
                       title: Text('Welcome, ${state.spotifyUser.displayName}!'),
                       subtitle: Text('You can now start adding NFC tags!'),
                     )
                   : ListTile(
+                      key: keys["not-loaded"],
                       title: Text('Sorry, something went wrong.'),
                       subtitle: Text(
-                          'The error was: ${(state as SpotifyError).failure.toString()}'),
+                          'The error was: ${(state as SpotifyError)?.failure.toString()}'),
                     ));
     });
   }
