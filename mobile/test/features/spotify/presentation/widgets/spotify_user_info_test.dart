@@ -2,6 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:jukeboxify/features/spotify/domain/entities/spotify_user_entity.dart';
 import 'package:jukeboxify/features/spotify/presentation/bloc/spotify/spotify_bloc.dart';
 import 'package:jukeboxify/features/spotify/presentation/widgets/spotify_user_info.dart';
 import 'package:mockito/mockito.dart';
@@ -36,16 +37,22 @@ void main() {
     spotifyBloc.close();
   });
 
-  testWidgets('SpotifyUserInfo shows Login Button & NotLoadedText',
-      (WidgetTester tester) async {
-    await tester.pumpWidget(testApp);
-    // prepare finders
-    final notLoaded = find.byKey(targetWidget.keys["not-loaded"]);
-    final infoWidget = find.byType(SpotifyUserInfoListItem);
-    // Bloc Mock - Initial state
-    when(spotifyBloc.state).thenAnswer((_) => SpotifyInitial());
-    // assert
-    expect(infoWidget, findsOneWidget);
-    expect(notLoaded, findsOneWidget);
+  group('SpotifyUserInfo', () {
+    testWidgets('handles not-loaded state correctly',
+        (WidgetTester tester) async {
+      final notLoaded = find.byKey(targetWidget.keys["not-loaded"]);
+      when(spotifyBloc.state).thenAnswer((_) => SpotifyInitial());
+      await tester.pumpWidget(testApp);
+      expect(notLoaded, findsOneWidget);
+    });
+
+    testWidgets('handles loaded state correctly', (WidgetTester tester) async {
+      final fakeUser = SpotifyUserEntity(displayName: 'Bob');
+      final loaded = find.byKey(targetWidget.keys["loaded"]);
+      when(spotifyBloc.state)
+          .thenAnswer((_) => SpotifyLoaded(spotifyUser: fakeUser));
+      await tester.pumpWidget(testApp);
+      expect(loaded, findsOneWidget);
+    });
   });
 }
