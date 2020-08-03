@@ -39,7 +39,7 @@ class SpotifyUserInfoListItem extends StatelessWidget {
                       subtitle: Text('You can now start adding NFC tags!'),
                     )
                   : ListTile(
-                      key: keys["not-loaded"],
+                      key: keys["error"],
                       title: Text('Sorry, something went wrong.'),
                       subtitle: Text(
                           'The error was: ${(state as SpotifyError)?.failure.toString()}'),
