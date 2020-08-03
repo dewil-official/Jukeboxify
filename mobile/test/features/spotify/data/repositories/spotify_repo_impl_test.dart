@@ -38,7 +38,10 @@ main() {
 
       final result = await repository.getSpotifyUser();
 
-      expect(result, Left(SpotifyServerFailure()));
+      expect(
+          result,
+          Left(SpotifyServerFailure(
+              message: 'The Spotify Server didn\'t respond.')));
       verify(mockSpotifyClient.getSpotifyUser());
       verifyNoMoreInteractions(mockSpotifyClient);
     });

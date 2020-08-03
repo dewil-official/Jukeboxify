@@ -45,7 +45,7 @@ main() {
     'should emit [SpotifyInitial, SpotifyError] when getting data fails',
     () async {
       // arrange
-      final failure = SpotifyServerFailure();
+      final failure = SpotifyServerFailure(message: 'Test Server Failure.');
       final spotifyErrorState = SpotifyError(failure: failure);
       when(mockGetSpotifyProfile(any)).thenAnswer((_) async => Left(failure));
       // assert

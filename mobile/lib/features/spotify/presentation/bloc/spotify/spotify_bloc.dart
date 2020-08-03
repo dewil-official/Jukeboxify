@@ -33,7 +33,8 @@ class SpotifyBloc extends Bloc<SpotifyEvent, SpotifyState> {
         yield SpotifyLoaded(spotifyUser: spotifyUser);
       });
     } else {
-      yield SpotifyError(failure: UnknownSpotifyFailure());
+      yield SpotifyError(
+          failure: UnknownSpotifyFailure(message: 'Unexpected Spotify Event.'));
     }
   }
 }

@@ -41,8 +41,7 @@ class SpotifyUserInfoListItem extends StatelessWidget {
                   : ListTile(
                       key: keys["error"],
                       title: Text('Sorry, something went wrong.'),
-                      subtitle: Text(
-                          'The error was: ${(state as SpotifyError)?.failure.toString()}'),
+                      subtitle: Text((state as SpotifyError)?.failure?.message),
                     ));
     });
   }

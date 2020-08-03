@@ -20,7 +20,8 @@ class SpotifyRepoImpl implements SpotifyRepo {
       final spotifyUser = await spotifyClient.getSpotifyUser();
       return Right(spotifyUser);
     } on SpotifyServerException {
-      return Left(SpotifyServerFailure());
+      return Left(
+          SpotifyServerFailure(message: 'The Spotify Server didn\'t respond.'));
     }
   }
 }

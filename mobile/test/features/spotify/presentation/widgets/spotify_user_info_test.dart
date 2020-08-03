@@ -58,10 +58,21 @@ void main() {
 
     testWidgets('handles error state correctly', (WidgetTester tester) async {
       final error = find.byKey(targetWidget.keys["error"]);
-      when(spotifyBloc.state)
-          .thenAnswer((_) => SpotifyError(failure: SpotifyServerFailure()));
+      when(spotifyBloc.state).thenAnswer(
+          (_) => SpotifyError(failure: SpotifyServerFailure(message: '')));
       await tester.pumpWidget(testApp);
       expect(error, findsOneWidget);
+    });
+
+    testWidgets('shows failure message', (WidgetTester tester) async {
+      final errorMessage = "The server didn't respond.";
+      final failure = SpotifyServerFailure(message: errorMessage);
+
+      when(spotifyBloc.state).thenAnswer((_) => SpotifyError(failure: failure));
+      final foundText = find.text(errorMessage);
+
+      await tester.pumpWidget(testApp);
+      expect(foundText, findsOneWidget);
     });
   });
 }
