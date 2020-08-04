@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:jukeboxify/core/injection/injection.dart';
+import 'package:jukeboxify/other/injection/injection.dart';
 import 'package:jukeboxify/features/main/presentation/pages/home_page.dart';
 
 import 'features/spotify/presentation/bloc/spotify/spotify_bloc.dart';

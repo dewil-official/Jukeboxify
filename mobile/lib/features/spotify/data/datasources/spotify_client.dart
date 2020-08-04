@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:injectable/injectable.dart';
-import 'package:jukeboxify/core/error/exceptions.dart';
+import 'package:jukeboxify/other/error/exceptions.dart';
 import 'package:jukeboxify/features/spotify/data/models/spotify_user_model.dart';
 import 'package:oauth2_client/oauth2_client.dart';
 import 'package:oauth2_client/oauth2_helper.dart';

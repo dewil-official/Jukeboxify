@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:jukeboxify/core/error/exceptions.dart';
-import 'package:jukeboxify/core/error/failures.dart';
+import 'package:jukeboxify/other/error/exceptions.dart';
+import 'package:jukeboxify/other/error/failures.dart';
 import 'package:jukeboxify/features/spotify/data/datasources/spotify_client.dart';
 import 'package:jukeboxify/features/spotify/data/models/spotify_user_model.dart';
 import 'package:jukeboxify/features/spotify/data/repositories/spotify_repo_impl.dart';

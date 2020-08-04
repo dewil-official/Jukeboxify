@@ -1,7 +1,7 @@
 import 'package:injectable/injectable.dart';
-import 'package:jukeboxify/core/error/failures.dart';
+import 'package:jukeboxify/other/error/failures.dart';
 import 'package:dartz/dartz.dart';
-import 'package:jukeboxify/core/usecases/usecase.dart';
+import 'package:jukeboxify/other/usecases/usecase.dart';
 import 'package:jukeboxify/features/spotify/domain/entities/spotify_user_entity.dart';
 import 'package:jukeboxify/features/spotify/domain/repositories/spotify_repo.dart';
 import 'package:meta/meta.dart';
