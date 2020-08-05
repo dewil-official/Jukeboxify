@@ -27,17 +27,17 @@ main() {
 
   blocTest('emits [SpotifyAuthSuccess] when [LoadedAuth] is added',
       build: () => bloc,
-      act: (bloc) => bloc.add(LoadedAuth()),
+      act: (bloc) => bloc.add(SpotifyAuthEvent.loaded),
       expect: [SpotifyAuthState.success]);
 
   blocTest('emits [SpotifyAuthFailure] when [FailedAuth] is added',
       build: () => bloc,
-      act: (bloc) => bloc.add(FailedAuth()),
+      act: (bloc) => bloc.add(SpotifyAuthEvent.failed),
       expect: [SpotifyAuthState.failure]);
 
   blocTest(
       'emits [SpotifyAuthFailure, SpotifyAuthLoading] when [FailedAuth, ResetAuth] are added',
       build: () => bloc,
-      act: (bloc) => {bloc.add(FailedAuth()), bloc.add(ResetAuth())},
+      act: (bloc) => {bloc.add(SpotifyAuthEvent.failed), bloc.add(SpotifyAuthEvent.reset)},
       expect: [SpotifyAuthState.failure, SpotifyAuthState.loading]);
 }
