@@ -7,14 +7,14 @@ part 'spotify_auth_event.dart';
 part 'spotify_auth_state.dart';
 
 class SpotifyAuthBloc extends Bloc<SpotifyAuthEvent, SpotifyAuthState> {
-  SpotifyAuthBloc() : super(SpotifyAuthLoading());
+  SpotifyAuthBloc() : super(SpotifyAuthState.loading);
 
   @override
   Stream<SpotifyAuthState> mapEventToState(
     SpotifyAuthEvent event,
   ) async* {
-    if (event is ResetAuth) yield SpotifyAuthLoading();
-    if (event is LoadedAuth) yield SpotifyAuthSuccess();
-    if (event is FailedAuth) yield SpotifyAuthFailure();
+    if (event is ResetAuth) yield SpotifyAuthState.loading;
+    if (event is LoadedAuth) yield SpotifyAuthState.success;
+    if (event is FailedAuth) yield SpotifyAuthState.failure;
   }
 }
