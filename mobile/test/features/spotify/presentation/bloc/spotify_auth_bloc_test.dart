@@ -1,10 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:jukeboxify/features/spotify/domain/usecases/get_spotify_auth_status.dart';
 import 'package:jukeboxify/features/spotify/presentation/bloc/spotify_auth/spotify_auth_bloc.dart';
-import 'package:jukeboxify/other/error/failures.dart';
-import 'package:jukeboxify/features/spotify/presentation/bloc/spotify/spotify_bloc.dart';
 import 'package:mockito/mockito.dart';
 
 class MockGetSpotifyAuthStatus extends Mock implements GetSpotifyAuthStatus {}
@@ -16,6 +13,10 @@ main() {
   setUp(() {
     mockGetSpotifyAuthStatus = MockGetSpotifyAuthStatus();
     bloc = SpotifyAuthBloc();
+  });
+
+  tearDown(() {
+    bloc.close();
   });
 
   blocTest(
