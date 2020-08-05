@@ -42,4 +42,15 @@ class SpotifyClient {
       throw SpotifyServerException();
     }
   }
+
+  Future<bool> hasValidAccessToken() async {
+    final token = await this.oAuth2Helper.getTokenFromStorage();
+    bool isValid = false;
+    try {
+      isValid = token.isValid();
+    } on NoSuchMethodError {
+      return false;
+    }
+    return isValid;
+  }
 }

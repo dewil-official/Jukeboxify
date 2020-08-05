@@ -46,4 +46,13 @@ main() {
       verifyNoMoreInteractions(mockSpotifyClient);
     });
   });
+
+  group('hasAccessToken', () {
+    test('returns true when token exists', () async {
+      when(mockSpotifyClient.hasValidAccessToken())
+          .thenAnswer((_) => Future.value(true));
+      final result = await repository.hasValidAccessToken();
+      expect(result, true);
+    });
+  });
 }

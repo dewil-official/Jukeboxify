@@ -24,4 +24,9 @@ class SpotifyRepoImpl implements SpotifyRepo {
           SpotifyServerFailure(message: 'The Spotify Server didn\'t respond.'));
     }
   }
+
+  @override
+  Future<bool> hasValidAccessToken() async {
+    return spotifyClient.hasValidAccessToken();
+  }
 }
