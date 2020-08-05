@@ -19,7 +19,7 @@ class SpotifyBloc extends Bloc<SpotifyEvent, SpotifyState> {
 
   SpotifyBloc({@required this.getSpotifyProfile})
       : assert(getSpotifyProfile != null),
-        super(SpotifyInitial());
+        super(SpotifyLoading());
 
   @override
   Stream<SpotifyState> mapEventToState(

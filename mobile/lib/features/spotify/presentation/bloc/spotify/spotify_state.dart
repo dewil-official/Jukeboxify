@@ -4,7 +4,7 @@ abstract class SpotifyState extends Equatable {
   const SpotifyState();
 }
 
-class SpotifyInitial extends SpotifyState {
+class SpotifyLoading extends SpotifyState {
   @override
   List<Object> get props => [];
 }

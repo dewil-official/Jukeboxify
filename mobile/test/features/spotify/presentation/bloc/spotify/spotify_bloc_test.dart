@@ -34,7 +34,7 @@ main() {
           .thenAnswer((_) async => Right(spotifyUser));
       // assert later
       final spotifyLoadedState = SpotifyLoaded(spotifyUser: spotifyUser);
-      expect(spotifyBloc.state, isA<SpotifyInitial>());
+      expect(spotifyBloc.state, isA<SpotifyLoading>());
       expectLater(spotifyBloc, emits(spotifyLoadedState));
       // act
       spotifyBloc.add(LoadUser());
@@ -49,7 +49,7 @@ main() {
       final spotifyErrorState = SpotifyError(failure: failure);
       when(mockGetSpotifyProfile(any)).thenAnswer((_) async => Left(failure));
       // assert
-      expect(spotifyBloc.state, isA<SpotifyInitial>());
+      expect(spotifyBloc.state, isA<SpotifyLoading>());
       expectLater(spotifyBloc, emits(spotifyErrorState));
       // act
       spotifyBloc.add(LoadUser());

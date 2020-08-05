@@ -13,7 +13,7 @@ class SpotifyUserInfoListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<SpotifyBloc, SpotifyState>(builder: (context, state) {
       return Card(
-          child: state is SpotifyInitial
+          child: state is SpotifyLoading
               ? ListTile(
                   key: keys["not-loaded"],
                   title: Text('Spotify isn\'t loaded.'),

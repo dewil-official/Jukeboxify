@@ -42,7 +42,7 @@ void main() {
     testWidgets('handles not-loaded state correctly',
         (WidgetTester tester) async {
       final notLoaded = find.byKey(targetWidget.keys["not-loaded"]);
-      when(spotifyBloc.state).thenAnswer((_) => SpotifyInitial());
+      when(spotifyBloc.state).thenAnswer((_) => SpotifyLoading());
       await tester.pumpWidget(testApp);
       expect(notLoaded, findsOneWidget);
     });
