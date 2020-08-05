@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
+import 'package:jukeboxify/features/spotify/domain/entities/spotify_auth_status.dart';
 import 'package:jukeboxify/other/error/exceptions.dart';
 import 'package:jukeboxify/features/spotify/data/datasources/spotify_client.dart';
 import 'package:meta/meta.dart';
@@ -26,7 +27,8 @@ class SpotifyRepoImpl implements SpotifyRepo {
   }
 
   @override
-  Future<bool> hasValidAccessToken() async {
-    return spotifyClient.hasValidAccessToken();
+  Future<SpotifyAuthStatus> getSpotifyAuthStatus() async {
+    final hasToken = await spotifyClient.hasValidAccessToken();
+    return SpotifyAuthStatus(isLoggedIn: hasToken);
   }
 }

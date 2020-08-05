@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:jukeboxify/features/spotify/domain/entities/spotify_auth_status.dart';
 import 'package:jukeboxify/other/error/exceptions.dart';
 import 'package:jukeboxify/other/error/failures.dart';
 import 'package:jukeboxify/features/spotify/data/datasources/spotify_client.dart';
@@ -47,12 +48,13 @@ main() {
     });
   });
 
-  group('hasAccessToken', () {
-    test('returns true when token exists', () async {
+  group('getSpotifyAuthStatus', () {
+    test('returns a SpotifyAuthStatus', () async {
       when(mockSpotifyClient.hasValidAccessToken())
           .thenAnswer((_) => Future.value(true));
-      final result = await repository.hasValidAccessToken();
-      expect(result, true);
+      final expected = SpotifyAuthStatus(isLoggedIn: true);
+      final result = await repository.getSpotifyAuthStatus();
+      expect(result, expected);
     });
   });
 }
