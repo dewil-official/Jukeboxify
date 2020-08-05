@@ -1,6 +1,4 @@
-import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:jukeboxify/other/error/failures.dart';
 
 abstract class UseCase<Type, Params> {
   dynamic call(Params params);
