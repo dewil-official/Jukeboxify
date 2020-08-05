@@ -2,9 +2,6 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 
-part 'spotify_auth_event.dart';
-part 'spotify_auth_state.dart';
-
 class SpotifyAuthBloc extends Bloc<SpotifyAuthEvent, SpotifyAuthState> {
   SpotifyAuthBloc() : super(SpotifyAuthState.loading);
 
@@ -16,4 +13,12 @@ class SpotifyAuthBloc extends Bloc<SpotifyAuthEvent, SpotifyAuthState> {
     if (event == SpotifyAuthEvent.loaded) yield SpotifyAuthState.success;
     if (event == SpotifyAuthEvent.failed) yield SpotifyAuthState.failure;
   }
+}
+
+enum SpotifyAuthState { loading, success, failure }
+
+enum SpotifyAuthEvent {
+  reset,
+  loaded,
+  failed,
 }
