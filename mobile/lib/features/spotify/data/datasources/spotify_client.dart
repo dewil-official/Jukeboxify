@@ -53,4 +53,26 @@ class SpotifyClient {
     }
     return isValid;
   }
+
+  Future<bool> hasToken() async {
+    final token = await oAuth2Helper.getTokenFromStorage();
+    return token != null;
+  }
+
+  Future<bool> isValidToken() async {
+    try {
+      // Does an example API request to validate the token.
+      await getSpotifyUser();
+    } catch (e) {}
+    final token = await this.oAuth2Helper.getTokenFromStorage();
+    if (!token.isValid() || token.isExpired()) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  Future promptLogin() async {
+    await oAuth2Helper.getToken();
+  }
 }

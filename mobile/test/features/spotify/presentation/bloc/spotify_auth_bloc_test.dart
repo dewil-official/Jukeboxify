@@ -1,18 +1,31 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:jukeboxify/features/spotify/domain/usecases/get_spotify_auth_status.dart';
+import 'package:jukeboxify/features/spotify/domain/usecases/auth/check_has_token.dart';
+import 'package:jukeboxify/features/spotify/domain/usecases/auth/is_valid_token.dart';
+import 'package:jukeboxify/features/spotify/domain/usecases/auth/promptLogin.dart';
 import 'package:jukeboxify/features/spotify/presentation/bloc/spotify_auth/spotify_auth_bloc.dart';
 import 'package:mockito/mockito.dart';
 
-class MockGetSpotifyAuthStatus extends Mock implements GetSpotifyAuthStatus {}
+class MockCheckHasToken extends Mock implements CheckHasToken {}
+
+class MockIsValidToken extends Mock implements IsValidToken {}
+
+class MockPromptLogin extends Mock implements PromptLogin {}
 
 main() {
-  MockGetSpotifyAuthStatus mockGetSpotifyAuthStatus;
+  MockCheckHasToken checkHasToken;
+  MockIsValidToken isValidToken;
+  MockPromptLogin promptLogin;
   SpotifyAuthBloc bloc;
 
   setUp(() {
-    mockGetSpotifyAuthStatus = MockGetSpotifyAuthStatus();
-    bloc = SpotifyAuthBloc();
+    checkHasToken = MockCheckHasToken();
+    isValidToken = MockIsValidToken();
+    promptLogin = MockPromptLogin();
+    bloc = SpotifyAuthBloc(
+        checkHasToken: checkHasToken,
+        isValidToken: isValidToken,
+        promptLogin: promptLogin);
   });
 
   tearDown(() {
@@ -25,19 +38,53 @@ main() {
     expect: [],
   );
 
-  blocTest('emits [SpotifyAuthSuccess] when [LoadedAuth] is added',
-      build: () => bloc,
-      act: (bloc) => bloc.add(SpotifyAuthEvent.loaded),
-      expect: [SpotifyAuthState.success]);
-
-  blocTest('emits [SpotifyAuthFailure] when [FailedAuth] is added',
-      build: () => bloc,
-      act: (bloc) => bloc.add(SpotifyAuthEvent.failed),
-      expect: [SpotifyAuthState.failure]);
+  blocTest(
+    'emits [initializing, needsLogin] when no token is stored',
+    build: () {
+      when(checkHasToken.call(any)).thenAnswer((_) => Future.value(false));
+      return bloc;
+    },
+    act: (bloc) => bloc.add(SpotifyAuthEvent.initialize),
+    expect: [SpotifyAuthState.initializing, SpotifyAuthState.needsLogin],
+  );
 
   blocTest(
-      'emits [SpotifyAuthFailure, SpotifyAuthLoading] when [FailedAuth, ResetAuth] are added',
-      build: () => bloc,
-      act: (bloc) => {bloc.add(SpotifyAuthEvent.failed), bloc.add(SpotifyAuthEvent.reset)},
-      expect: [SpotifyAuthState.failure, SpotifyAuthState.loading]);
+    'emits [initializing, checksToken, success] when a valid token is stored',
+    build: () {
+      when(checkHasToken.call(any)).thenAnswer((_) => Future.value(true));
+      when(isValidToken.call(any)).thenAnswer((_) => Future.value(true));
+      return bloc;
+    },
+    act: (bloc) => bloc.add(SpotifyAuthEvent.initialize),
+    expect: [
+      SpotifyAuthState.initializing,
+      SpotifyAuthState.checksToken,
+      SpotifyAuthState.success
+    ],
+  );
+
+  // TODO: Find out whether an invalid token could be automatically refreshed.
+  blocTest(
+    'emits [initializing, checksToken, failure] when an invalid token is stored',
+    build: () {
+      when(checkHasToken.call(any)).thenAnswer((_) => Future.value(true));
+      when(isValidToken.call(any)).thenAnswer((_) => Future.value(false));
+      return bloc;
+    },
+    act: (bloc) => bloc.add(SpotifyAuthEvent.initialize),
+    expect: [
+      SpotifyAuthState.initializing,
+      SpotifyAuthState.checksToken,
+      SpotifyAuthState.failure
+    ],
+  );
+
+  blocTest(
+    'runs promptLogin when [loginUser] is emitted',
+    build: () => bloc,
+    act: (bloc) => bloc.add(SpotifyAuthEvent.loginUser),
+    verify: (bloc) {
+      verify(promptLogin.call(any)).called(1);
+    },
+  );
 }

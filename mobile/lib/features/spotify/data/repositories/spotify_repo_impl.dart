@@ -31,4 +31,19 @@ class SpotifyRepoImpl implements SpotifyRepo {
     final hasToken = await spotifyClient.hasValidAccessToken();
     return SpotifyAuthStatus(isLoggedIn: hasToken);
   }
+
+  @override
+  Future<bool> hasToken() {
+    return spotifyClient.hasToken();
+  }
+
+  @override
+  Future<bool> isValidToken() {
+    return spotifyClient.isValidToken();
+  }
+
+  @override
+  Future promptLogin() {
+    return spotifyClient.promptLogin();
+  }
 }

@@ -12,6 +12,9 @@ import 'package:oauth2_client/oauth2_helper.dart';
 import '../../features/spotify/data/datasources/spotify_client.dart';
 import '../../features/spotify/data/repositories/spotify_repo_impl.dart';
 import '../../features/spotify/domain/repositories/spotify_repo.dart';
+import '../../features/spotify/domain/usecases/auth/check_has_token.dart';
+import '../../features/spotify/domain/usecases/auth/is_valid_token.dart';
+import '../../features/spotify/domain/usecases/auth/promptLogin.dart';
 import '../../features/spotify/domain/usecases/get_spotify_auth_status.dart';
 import '../../features/spotify/domain/usecases/get_spotify_profile.dart';
 import '../../features/spotify/presentation/bloc/spotify/spotify_bloc.dart';
@@ -32,16 +35,28 @@ void $initGetIt(GetIt g, {String environment}) {
   // Eager singletons must be registered in the right order
   gh.singleton<OAuth2Helper>(registerModule
       .oAuth2Helper(g<OAuth2Client>(instanceName: 'OAuth2Client')));
-  gh.singleton<SpotifyAuthBloc>(SpotifyAuthBloc(), registerFor: {_dev});
   gh.singleton<SpotifyClient>(SpotifyClient(oAuth2Helper: g<OAuth2Helper>()),
       registerFor: {_dev});
   gh.singleton<SpotifyRepo>(SpotifyRepoImpl(spotifyClient: g<SpotifyClient>()),
+      registerFor: {_dev});
+  gh.singleton<CheckHasToken>(CheckHasToken(spotifyRepo: g<SpotifyRepo>()),
       registerFor: {_dev});
   gh.singleton<GetSpotifyAuthStatus>(
       GetSpotifyAuthStatus(spotifyRepo: g<SpotifyRepo>()),
       registerFor: {_dev});
   gh.singleton<GetSpotifyProfile>(
       GetSpotifyProfile(spotifyRepo: g<SpotifyRepo>()),
+      registerFor: {_dev});
+  gh.singleton<IsValidToken>(IsValidToken(spotifyRepo: g<SpotifyRepo>()),
+      registerFor: {_dev});
+  gh.singleton<PromptLogin>(PromptLogin(spotifyRepo: g<SpotifyRepo>()),
+      registerFor: {_dev});
+  gh.singleton<SpotifyAuthBloc>(
+      SpotifyAuthBloc(
+        checkHasToken: g<CheckHasToken>(),
+        isValidToken: g<IsValidToken>(),
+        promptLogin: g<PromptLogin>(),
+      ),
       registerFor: {_dev});
   gh.singleton<SpotifyBloc>(
       SpotifyBloc(getSpotifyProfile: g<GetSpotifyProfile>()),

@@ -13,8 +13,12 @@ class JukeboxifyApp extends StatelessWidget {
         providers: [
           BlocProvider<SpotifyBloc>(
               create: (BuildContext context) => getIt.get<SpotifyBloc>()),
-          BlocProvider<SpotifyAuthBloc>(
-              create: (BuildContext context) => getIt.get<SpotifyAuthBloc>()),
+          BlocProvider<SpotifyAuthBloc>(create: (BuildContext context) {
+            final bloc = getIt.get<SpotifyAuthBloc>();
+            // Automatically load the SpotifyAuth on Startup.
+            bloc.add(SpotifyAuthEvent.initialize);
+            return bloc;
+          }),
         ],
         child: MaterialApp(
             title: 'Jukeboxify',

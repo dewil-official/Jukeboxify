@@ -5,5 +5,9 @@ import 'package:jukeboxify/features/spotify/domain/entities/spotify_user_entity.
 
 abstract class SpotifyRepo {
   Future<Either<Failure, SpotifyUserEntity>> getSpotifyUser();
+  Future<bool> hasToken();
+  Future<bool> isValidToken();
+  Future promptLogin();
+  // TODO: Remove this
   Future<SpotifyAuthStatus> getSpotifyAuthStatus();
 }
