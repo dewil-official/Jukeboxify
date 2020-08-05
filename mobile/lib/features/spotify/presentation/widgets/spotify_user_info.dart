@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jukeboxify/features/spotify/presentation/bloc/spotify/spotify_bloc.dart';
+import 'package:jukeboxify/features/spotify/presentation/bloc/spotify_auth/spotify_auth_bloc.dart';
 
 class SpotifyUserInfoListItem extends StatelessWidget {
   final keys = {
@@ -11,9 +12,10 @@ class SpotifyUserInfoListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SpotifyBloc, SpotifyState>(builder: (context, state) {
+    return BlocBuilder<SpotifyAuthBloc, SpotifyAuthState>(
+        builder: (context, state) {
       return Card(
-          child: state is SpotifyLoading
+          child: state == SpotifyAuthState.loading
               ? ListTile(
                   key: keys["not-loaded"],
                   title: Text('Spotify isn\'t loaded.'),
@@ -32,16 +34,16 @@ class SpotifyUserInfoListItem extends StatelessWidget {
                       icon: Icon(Icons.transit_enterexit),
                       label: Text('Login/Load')),
                 )
-              : state is SpotifyLoaded
+              : state == SpotifyAuthState.success
                   ? ListTile(
                       key: keys["loaded"],
-                      title: Text('Welcome, ${state.spotifyUser.displayName}!'),
+                      title: Text('Welcome!'),
                       subtitle: Text('You can now start adding NFC tags!'),
                     )
                   : ListTile(
                       key: keys["error"],
                       title: Text('Sorry, something went wrong.'),
-                      subtitle: Text((state as SpotifyError)?.failure?.message),
+                      subtitle: Text('Please login again.'),
                     ));
     });
   }

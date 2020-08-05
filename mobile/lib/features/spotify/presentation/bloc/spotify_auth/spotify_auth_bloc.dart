@@ -1,7 +1,10 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:injectable/injectable.dart';
 
+@Environment(Environment.dev)
+@singleton
 class SpotifyAuthBloc extends Bloc<SpotifyAuthEvent, SpotifyAuthState> {
   SpotifyAuthBloc() : super(SpotifyAuthState.loading);
 
