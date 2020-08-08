@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:jukeboxify/features/spotify/domain/entities/spotify_auth_status.dart';
 import 'package:jukeboxify/other/error/exceptions.dart';
 import 'package:jukeboxify/other/error/failures.dart';
 import 'package:jukeboxify/features/spotify/data/datasources/spotify_client.dart';
@@ -45,16 +44,6 @@ main() {
               message: 'The Spotify Server didn\'t respond.')));
       verify(mockSpotifyClient.getSpotifyUser());
       verifyNoMoreInteractions(mockSpotifyClient);
-    });
-  });
-
-  group('getSpotifyAuthStatus', () {
-    test('returns a SpotifyAuthStatus', () async {
-      when(mockSpotifyClient.hasValidAccessToken())
-          .thenAnswer((_) => Future.value(true));
-      final expected = SpotifyAuthStatus(isLoggedIn: true);
-      final result = await repository.getSpotifyAuthStatus();
-      expect(result, expected);
     });
   });
 }

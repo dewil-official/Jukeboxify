@@ -15,7 +15,6 @@ import '../../features/spotify/domain/repositories/spotify_repo.dart';
 import '../../features/spotify/domain/usecases/auth/check_has_token.dart';
 import '../../features/spotify/domain/usecases/auth/is_valid_token.dart';
 import '../../features/spotify/domain/usecases/auth/promptLogin.dart';
-import '../../features/spotify/domain/usecases/get_spotify_auth_status.dart';
 import '../../features/spotify/domain/usecases/get_spotify_profile.dart';
 import '../../features/spotify/presentation/bloc/spotify/spotify_bloc.dart';
 import '../../features/spotify/presentation/bloc/spotify_auth/spotify_auth_bloc.dart';
@@ -40,9 +39,6 @@ void $initGetIt(GetIt g, {String environment}) {
   gh.singleton<SpotifyRepo>(SpotifyRepoImpl(spotifyClient: g<SpotifyClient>()),
       registerFor: {_dev});
   gh.singleton<CheckHasToken>(CheckHasToken(spotifyRepo: g<SpotifyRepo>()),
-      registerFor: {_dev});
-  gh.singleton<GetSpotifyAuthStatus>(
-      GetSpotifyAuthStatus(spotifyRepo: g<SpotifyRepo>()),
       registerFor: {_dev});
   gh.singleton<GetSpotifyProfile>(
       GetSpotifyProfile(spotifyRepo: g<SpotifyRepo>()),

@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
-import 'package:jukeboxify/features/spotify/domain/entities/spotify_auth_status.dart';
 import 'package:jukeboxify/other/error/exceptions.dart';
 import 'package:jukeboxify/features/spotify/data/datasources/spotify_client.dart';
 import 'package:meta/meta.dart';
@@ -24,12 +23,6 @@ class SpotifyRepoImpl implements SpotifyRepo {
       return Left(
           SpotifyServerFailure(message: 'The Spotify Server didn\'t respond.'));
     }
-  }
-
-  @override
-  Future<SpotifyAuthStatus> getSpotifyAuthStatus() async {
-    final hasToken = await spotifyClient.hasValidAccessToken();
-    return SpotifyAuthStatus(isLoggedIn: hasToken);
   }
 
   @override
