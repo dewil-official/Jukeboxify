@@ -13,6 +13,7 @@ class NeedsLoginBanner extends StatelessWidget {
       title: Text('Spotify isn\'t loaded.'),
       subtitle: Text('Click the button to load Spotify.'),
       trailing: RaisedButton.icon(
+          key: ValueKey('SpotifyLoginButton'),
           onPressed: () => {
                 BlocProvider.of<SpotifyAuthBloc>(context)
                     .add(SpotifyAuthEvent.loginUser)
