@@ -81,9 +81,13 @@ main() {
 
   blocTest(
     'runs promptLogin when [loginUser] is emitted',
-    build: () => bloc,
+    build: () {
+      when(checkHasToken.call(any)).thenAnswer((_) => Future.value(true));
+      when(isValidToken.call(any)).thenAnswer((_) => Future.value(true));
+      return bloc;
+    },
     act: (bloc) => bloc.add(SpotifyAuthEvent.loginUser),
-    verify: (bloc) {
+    verify: (_) {
       verify(promptLogin.call(any)).called(1);
     },
   );
