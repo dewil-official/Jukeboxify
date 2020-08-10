@@ -63,7 +63,6 @@ main() {
     ],
   );
 
-  // TODO: Find out whether an invalid token could be automatically refreshed.
   blocTest(
     'emits [initializing, checksToken, failure] when an invalid token is stored',
     build: () {
