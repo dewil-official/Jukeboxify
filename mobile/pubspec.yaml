@@ -46,6 +46,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_driver:
+    sdk: flutter
   # add the generator to your dev_dependencies
   injectable_generator: ^1.0.2
   # of course build_runner is needed to run the generator
