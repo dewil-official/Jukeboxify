@@ -33,10 +33,14 @@ void main() {
       }
     });
 
-    test('increments the counter', () async {
+    test('Login Button works', () async {
       await driver.tap(loginButtonFinder);
       await Future.delayed(Duration(seconds: 5));
-      // How to test for CustomChromeTabs?
-    });
+      throw UnimplementedError();
+      // How to test for CustomChromeTabs? => You can't
+      // Instead: Mock it.
+      // From where? NOT HERE! (Cannot use flutter dependency from flutter_driver tests)
+      // Instead: Directly inside the app?! -> Isn't that clean.
+    }, skip: 'Not yet implemented: Issues with mocking the network stuff');
   });
 }
